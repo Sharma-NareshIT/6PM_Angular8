@@ -1,0 +1,67 @@
+<div class="container">
+ <div (click)="ShowCart()" class="btn" style="position: fixed; right: 10px; top:10px">
+     <img src="assets/cart.png" width="30" height="30">
+ <span><b>{{cartItemsCount}}</b></span>
+ </div>
+ <h2 class="text-center text-primary">Amazon Shopping</h2>
+ <div class="form-group">
+   <label>Select a Category</label>
+   <div>
+       <select (change)="CategoryChanged()" [(ngModel)]="selectedCategory" class="form-control">
+           <option *ngFor="let category of categories">
+              {{category}}
+           </option>
+       </select>
+   </div>
+ </div>
+ <div class="form-group">
+    <label>Select a Product</label>
+    <div>
+        <select (change)="ProductChanged()" [(ngModel)]="selectedProduct" class="form-control">
+            <option *ngFor="let product of selectedProducts">
+                {{product}}
+            </option>
+        </select>
+    </div>
+ </div>
+ <div class="form-group">
+   <label>Preview</label>
+   <div class="card text-center">
+    <div class="card-header">
+     <h2>{{prodName}}</h2>
+    </div>
+    <div class="card-body">
+      <img [src]="prodPhoto" width="200" height="200" >
+    </div>
+    <div class="card-footer">
+    <h3> &#8377; {{prodPrice}}</h3>
+    <button (click)="AddToCart()" class="btn btn-primary">Add to Cart</button>
+    </div>
+   </div>
+ </div>
+ <div *ngIf="isCartVisible" class="form-group">
+     <h2>Your Cart Items</h2>
+     <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Preview</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartItems; let i=index">
+            <td>{{item.Name}}</td>
+            <td>{{item.Price}}</td>
+            <td>
+                <img [src]="item.Photo" width="50" height="50">
+            </td>
+            <td>
+                <button (click)="DeleteCartItem(i)" class="btn btn-danger">Delete</button>
+            </td>
+            </tr>
+        </tbody>
+     </table>
+ </div>
+</div>
